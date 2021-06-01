@@ -1,0 +1,11 @@
+form {
+  max-width: 600px;
+}
+div[role="alert"] {
+  color: red;
+}
+.message-chars-left {
+    width: 600px;
+    margin: auto;
+    text-align: left;
+  }

@@ -75,34 +75,32 @@ export const ContactForm = () => {
             <p className='status-message'>{statusMessage}</p>
             <Form.Group controlId="formBasicText">
                 <Form.Label>Imię</Form.Label>
-                {errors.name && !errors.name.type === "required" && (
-                    <div role="alert">Imię jest wymagane, uzupełnij poniższe pole<br /></div>
-                )}
-                {errors.name && errors.name.type === "required" && <div role="alert">Imię jest wymagane, uzupełnij poniższe pole<br /></div>}
                 <Form.Control
                     type="text"
                     name='name'
                     placeholder="Imię"
                     maxLength='30'
-                    aria-invalid={errors.name ? true : false}
-                    ref={register({ required: true })}
+                    {...register('name', {required: true})}
                 />
+                {errors.name && !errors.name.type === "required" && (
+                    <div role="alert">Imię jest wymagane, uzupełnij poniższe pole<br /></div>
+                )}
+                {errors.name && errors.name.type === "required" && <div role="alert">Imię jest wymagane, uzupełnij poniższe pole<br /></div>}
                 <p className='message-chars-left'>{nameCharsLeft}</p>
 
             </Form.Group>
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
-                {errors.user_email && errors.user_email.type === "required" && (
-                    <div role="alert">Email jest wymagany, uzupełnij poniższe pole<br /></div>
-                )}
                 <Form.Control
                     type="email"
                     name='user_email'
                     placeholder="Adres email"
                     maxLength='30'
-                    aria-invalid={errors.user_email ? true : false}
-                    ref={register({ required: true })}
+                    {...register('user_email', {required: true})}
                 />
+                {errors.user_email && errors.user_email.type === "required" && (
+                    <div role="alert">Email jest wymagany, uzupełnij poniższe pole<br /></div>
+                )}
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Wiadomość</Form.Label>
@@ -111,18 +109,16 @@ export const ContactForm = () => {
                     rows={3}
                     name='message'
                     placeholder='Widomość'
-                    ref={register()}
+                    // ref={register()}
                     maxLength='500'
+                    {...register('message')}
+
                 />
                 <p className='message-chars-left'>{messageCharsLeft}</p>
             </Form.Group>
-            {/* <ReCaptcha onVerifyCaptcha={onVerifyCaptcha} /> */}
             <ReCAPTCHA
                 sitekey={CaptchaKey}
                 // onChange={onChange}
-                aria-invalid={errors.name ? true : false}
-                ref={register({ required: true })}
-                name="recaptcha"
             />
             <Button variant="primary" type="submit" value='Send'>Wyślij</Button>
         </Form>
